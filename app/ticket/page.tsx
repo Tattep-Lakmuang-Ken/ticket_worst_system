@@ -34,7 +34,7 @@ export default function TicketPage() {
   const desCount = useRef(Math.floor(Math.random() * 20) + 1);
   const proCount = useRef(Math.floor(Math.random() * 20) + 1);
   const genCount = useRef(Math.floor(Math.random() * 20) + 1);
-
+  
   const totalDivisor = devCount.current + desCount.current + proCount.current + genCount.current;
 
   const handleSubmit = (ticket: string, which: "ticket1" | "ticket2") => {
@@ -65,7 +65,11 @@ export default function TicketPage() {
     return opts;
   })();
 
-  const handleMouseEnterBox = (hoverRef, setHideWholeBox) => {
+  const handleMouseEnterBox = (
+    hoverRef: React.MutableRefObject<number>,
+    setHideWholeBox: React.Dispatch<React.SetStateAction<boolean>>
+  ) => {
+  
     hoverRef.current += 1;
     if (hoverRef.current <= 5) {
       setHideWholeBox(true);
@@ -73,15 +77,21 @@ export default function TicketPage() {
     }
   };
 
-  const handleBoxClick = (e, setTicket, claimRef) => {
+  const handleBoxClick = (
+    e: React.MouseEvent<HTMLDivElement>,
+    setTicket: React.Dispatch<React.SetStateAction<string>>,
+    claimRef: React.RefObject<HTMLElement | null>
+  ) => {
+  
     if (!claimRef.current || e.target !== claimRef.current) {
       setTicket("");
     }
   };
 
-  const claimRef1 = useRef(null);
-  const claimRef2 = useRef(null);
-  const mainClaimRef = useRef(null);
+  const claimRef1 = useRef<HTMLElement | null>(null);
+  const claimRef2 = useRef<HTMLElement | null>(null);
+  const mainClaimRef = useRef<HTMLElement | null>(null);
+
   const registerRef = useRef(null);
 
   return (
@@ -133,7 +143,6 @@ export default function TicketPage() {
       </h1>
 
       <Button
-        variant="outline"
         className="text-sm mb-6 border-gray-400 text-gray-300"
         onClick={() => setShowHowBubble(true)}
       >How to Get Tickets?</Button>
