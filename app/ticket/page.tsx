@@ -1,14 +1,19 @@
 "use client";
 import { useRouter } from "next/navigation";
 import React, { useState, useRef } from "react";
+import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 
+const Button = (
+  props: DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
+) => (
+  <button
+    {...props}
+    className={`bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded ${props.className || ""}`}
+  >
+    {props.children}
+  </button>
+);
 
-
-const Button = (props) => (
-    <button {...props} className={`bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded ${props.className || ""}`}>
-      {props.children}
-    </button>
-  );
   
 
 export default function TicketPage() {
